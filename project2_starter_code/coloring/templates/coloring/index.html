@@ -33,7 +33,7 @@
         #myCanvas {
             padding-left: 0;
             padding-right: 0;
-            padding-top: 150px;
+            /*padding-top: 150px;*/
             margin-left: auto;
             margin-right: auto;
             display: block;
@@ -50,32 +50,16 @@
             right: 0;
         }
 
-        /*#r_right {*/
-        /*    width: 300px;*/
-        /*    background-color: #f1f1f1;*/
-        /*    display: flex;*/
-        /*    flex-wrap: wrap;*/
-        /*    position: absolute;*/
-        /*    top: 0;*/
-        /*    right: 0;*/
-        /*}
+
+
 
         /*--Test Code--*/
+
 
         /*----*/
 
     </style>
 
-<!--    <script type="text/javascript">-->
-<!--        $ (document).ready(() => {-->
-<!--            // ("#test").hide();-->
-<!--            $("#r_left").on("click", () => {-->
-<!--                $("#myCanvas")-->
-<!--                // $(".p2-circle.bg-purple").hide();-->
-<!--            });-->
-<!--        });-->
-<!--            -->
-<!--    </script>-->
 
 
     <script type="text/javascript" canvas="canvas">
@@ -96,7 +80,6 @@
                 item: null,
                 lastClicked: null,
                 filePath: '/static/coloring/images/Duck_Outline.svg'
-                // $container: $('#duck-design')
             };
 
             // color palette
@@ -106,10 +89,6 @@
                 $container: $('#color-palette')
             };
 
-            // var rb = {
-            //    options: [],
-            //    $container: $('#rotation-buttons')
-            // };
 
             // var rectangle = new paper.Rectangle(285,300,150,80);
             // var path = new paper.Path.Rectangle(rectangle);
@@ -119,7 +98,7 @@
                 var tool = new paper.Tool();
 
 
-                var rectangle = new paper.Rectangle(285,300,150,80)
+                var rectangle = new paper.Rectangle(285,300,150,80);
                 var path = new paper.Path.Rectangle(rectangle);
                 // var colorStops = [cp.history[cp.history.length - 1], cp.history[cp.history.length - 2]]
                 var originPoint;
@@ -150,13 +129,13 @@
             function myCustomInteraction() {
                 var tool = new paper.Tool();
 
-                tool.onMouseDown = function (event) {
-                    var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
-                    if (hit) {
-                        hit.item.fillColor = cp.history[cp.history.length - 1];
-                        // duck.rotate(45);
-                    }
-                };
+                // tool.onMouseDown = function (event) {
+                //     var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
+                //     if (hit) {
+                //         hit.item.fillColor = cp.history[cp.history.length - 1];
+                //         // duck.rotate(45);
+                //     }
+                // };
 
                 document.getElementById("r_left").onclick = function () {
                     duck.rotate(-45);
@@ -164,11 +143,17 @@
 
                 document.getElementById("r_right").onclick = function () {
                     duck.rotate(45);
+                };
+
+                tool.onMouseDown = function (event) {
+                    var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
+                    if (hit) {
+                        // event.point.x
+                        var rectangle = new paper.Rectangle(event.point.x - 75,event.point.y - 2000,150,4000);
+                        var path = new paper.Path.Rectangle(rectangle);
+                        path.fillColor = cp.history[cp.history.length - 1];
+                    };
                 }
-
-
-
-
 
 
             }
@@ -207,11 +192,17 @@
                 getColorsCreatePalette();
 
                 paper.project.importSVG(duck.filePath, function(item) {
-                    // duck.item = item._children["design-freepik"];
+                    duck.item = item._children["design-freepik"];
+                    // duck = item;
+                    // duck.scale(0.5);
+                    // duck.
                     paper.project.insertLayer(0,duck.item);
 
                     if (custom) {
                         duck = item;
+                        duck.scale(0.8);
+                        duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+
                         myCustomInteraction();
 
                     } else {
@@ -238,7 +229,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="750px" height="750px">
+<canvas id="myCanvas" width="750px" height="4000px">
 </canvas>
 <div id="color-palette"></div>
  <div class="row">
