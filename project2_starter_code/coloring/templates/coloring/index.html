@@ -129,6 +129,7 @@
             // you may replace everything
             function myCustomInteraction() {
                 var tool = new paper.Tool();
+                var group = new paper.Group([window.duck]);
 
                 // tool.onMouseDown = function (event) {
                 //     var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
@@ -139,11 +140,11 @@
                 // };
 
                 document.getElementById("r_left").onclick = function () {
-                    window.duck.rotate(-45);
+                    group.rotate(-45);
                 };
 
                 document.getElementById("r_right").onclick = function () {
-                    window.duck.rotate(45);
+                    group.rotate(45);
                 };
 
 
@@ -157,16 +158,22 @@
 
                         // console.log(path.divide(path));
 
-                        var result = window.duck.divide(color_strip, {insert:true, trace:true});
-                        result.children[0].fillColor = cp.history[cp.history.length - 1];
-                        result.children[1].fillColor = cp.history[cp.history.length - 1];
+                        var result_rect = window.duck.intersect(color_strip);
+                        result_rect.fillColor = color_strip.fillColor;
+                        group.addChild(result_rect);
+
+
+
+                        // var result = window.duck.divide(color_strip, {insert:true, trace:true});
+                        // result.children[1].fillColor = cp.history[cp.history.length - 1];
+                        // result.children[1].fillColor = cp.history[cp.history.length - 1];
                         // result.children[2].fillColor = cp.history[cp.history.length - 1];
                         // var result = path.divide(duck);
                         // result.clipped = true;
 
-                        window.duck.clear();
+                        // window.duck.clear();
                         color_strip.clear();
-                        window.duck = result;
+                        // window.duck = result;
 
 
                         // Remove previous duck
@@ -270,13 +277,13 @@
                 paper.setup(canvas);
                 getColorsCreatePalette();
 
-                var duck_design = new paper.Rectangle(285, 300, 150, 80);
+                var duck_design = new paper.Rectangle(285, 300, 500, 400);
                 window.duck = new paper.Path.Rectangle(duck_design);
                 duck.closed = true;
                 duck.strokeColor = 'black';
                 duck.fillColor = 'white';
                 myCustomInteraction();
-                duck.position = new paper.Point(duck.bounds.width / 1.4, duck.bounds.height);
+                duck.position = new paper.Point(duck.bounds.width/1.5 , duck.bounds.height*1.2);
 
                 // paper.project.importSVG(duck.filePath, function(item) {
                 //     duck.item = item._children["design-freepik"];

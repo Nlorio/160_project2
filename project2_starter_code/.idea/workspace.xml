@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c1e79c7-5cc6-4e8a-bffe-cc239eb6b867" name="Default Changelist" comment="" />
+    <list default="true" id="7c1e79c7-5cc6-4e8a-bffe-cc239eb6b867" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="160" column="89" selection-start-line="160" selection-start-column="89" selection-end-line="160" selection-end-column="89" />
+            <state relative-caret-position="529">
+              <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -151,12 +153,12 @@
       <updated>1562655720049</updated>
       <workItem from="1562655721368" duration="6052000" />
       <workItem from="1562696375679" duration="103000" />
-      <workItem from="1563053193009" duration="43452000" />
+      <workItem from="1563053193009" duration="45335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49607000" />
+    <option name="totallyTimeSpent" value="51490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
@@ -222,8 +224,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="160" column="89" selection-start-line="160" selection-start-column="89" selection-end-line="160" selection-end-column="89" />
+        <state relative-caret-position="529">
+          <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
         </state>
       </provider>
     </entry>
