@@ -77,11 +77,11 @@
             // };
 
             // Design Silhouette
-            var duck = {
-                item: null,
-                lastClicked: null,
-                filePath: '/static/coloring/images/Duck_Outline.svg'
-            };
+            // var duck = {
+            //     item: null,
+            //     lastClicked: null,
+            //     // filePath: '/static/coloring/images/Duck_Outline.svg'
+            // };
 
             // color palette
             var cp = {
@@ -139,53 +139,53 @@
                 // };
 
                 document.getElementById("r_left").onclick = function () {
-                    duck.rotate(-45);
+                    window.duck.rotate(-45);
                 };
 
                 document.getElementById("r_right").onclick = function () {
-                    duck.rotate(45);
+                    window.duck.rotate(45);
                 };
 
 
                 tool.onMouseDown = function (event) {
-                    var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
+
+                    var hit = window.duck.hitTest(event.point, { tolerance: 10, fill: true });
                     if (hit) {
-                        // event.point.x
                         var rectangle = new paper.Rectangle(event.point.x - 50,event.point.y - 2000,100,4000);
                         var color_strip = new paper.Path.Rectangle(rectangle);
                         color_strip.fillColor = cp.history[cp.history.length - 1];
 
                         // console.log(path.divide(path));
-                        // paper.project._activeLayer.remove();
 
-                        console.log(duck);
-                        console.log(color_strip);
-                        var result = duck.divide(color_strip); // Not a valid operation
+                        var result = window.duck.divide(color_strip, {insert:true, trace:true});
+                        result.children[0].fillColor = cp.history[cp.history.length - 1];
+                        result.children[1].fillColor = cp.history[cp.history.length - 1];
+                        // result.children[2].fillColor = cp.history[cp.history.length - 1];
                         // var result = path.divide(duck);
                         // result.clipped = true;
 
-                        console.log("Hello World");
-
-                        duck = result;
+                        window.duck.clear();
+                        color_strip.clear();
+                        window.duck = result;
 
 
                         // Remove previous duck
                         // paper.project._activeLayer.remove();
-                        // // paper.project.getLayers()[0].remove();
-                        //
-                        // //exportSVG()
-                        var svgPathNode = result.exportSVG();
-                        // // paper.project.importSVG(svgPathNode.filePath, );
-                        //
-                        // // Upload and place new
-                        // Method 1
-                        paper.project.importSVG(svgPathNode, function(item) {
-                              duck = item;
-                              duck.scale(0.8);
-                              duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
-                              myCustomInteraction();
-                              // paper.project.insertLayer(0, duck);
-                        });
+                        // // // paper.project.getLayers()[0].remove();
+                        // //
+                        // // //exportSVG()
+                        // var svgPathNode = result.exportSVG();
+                        // // // paper.project.importSVG(svgPathNode.filePath, );
+                        // //
+                        // // // Upload and place new
+                        // // Method 1
+                        // paper.project.importSVG(svgPathNode, function(item) {
+                        //       duck = item;
+                        //       duck.scale(0.8);
+                        //       duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        //       myCustomInteraction();
+                        //       // paper.project.insertLayer(0, duck);
+                        // });
 
 
                         // var svgPathElement = result.exportSVG(),
@@ -266,27 +266,35 @@
                 });
             }
 
-            function init(custom){
+            function init(){
                 paper.setup(canvas);
                 getColorsCreatePalette();
 
-                paper.project.importSVG(duck.filePath, function(item) {
-                    duck.item = item._children["design-freepik"];
-                    paper.project.insertLayer(0,duck.item);
+                var duck_design = new paper.Rectangle(285, 300, 150, 80);
+                window.duck = new paper.Path.Rectangle(duck_design);
+                duck.closed = true;
+                duck.strokeColor = 'black';
+                duck.fillColor = 'white';
+                myCustomInteraction();
+                duck.position = new paper.Point(duck.bounds.width / 1.4, duck.bounds.height);
 
-                    if (custom) {
-                        duck = item;
-                        duck.scale(0.8);
-                        // duck.scale(12);
-                        duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
-
-                        myCustomInteraction();
-
-                    } else {
-                        myGradientInteraction();
-                    }
-
-                });
+                // paper.project.importSVG(duck.filePath, function(item) {
+                //     duck.item = item._children["design-freepik"];
+                //     paper.project.insertLayer(0,duck.item);
+                //
+                //     if (custom) {
+                //         duck = item;
+                //         duck.scale(0.8);
+                //         // duck.scale(12);
+                //         duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                //
+                //         myCustomInteraction();
+                //
+                //     } else {
+                //         myGradientInteraction();
+                //     }
+                //
+                // });
             }
 
             // To see your myGradientInteraction version visit:
