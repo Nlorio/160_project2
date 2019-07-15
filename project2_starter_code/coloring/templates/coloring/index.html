@@ -7,8 +7,8 @@
     <title>P3 Coloring</title>
 
     <script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
-<!--    <script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>-->
-    <script type="text/javascript" src="{% static 'coloring/vendors/paper_19/dist/paper-full.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+<!--    <script type="text/javascript" src="{% static 'coloring/vendors/paper_19/dist/paper-full.min.js' %}"></script>-->
 <!--    <script type="text/javascript" src="{% static 'coloring/vendors/zingtouch-master/dist/zingtouch.min.js' %}"></script>-->
 
 
@@ -152,14 +152,17 @@
                     if (hit) {
                         // event.point.x
                         var rectangle = new paper.Rectangle(event.point.x - 50,event.point.y - 2000,100,4000);
-                        var path = new paper.Path.Rectangle(rectangle);
-                        path.fillColor = cp.history[cp.history.length - 1];
+                        var color_strip = new paper.Path.Rectangle(rectangle);
+                        color_strip.fillColor = cp.history[cp.history.length - 1];
 
-
+                        // console.log(path.divide(path));
                         // paper.project._activeLayer.remove();
-                        var result = duck.divide(path);
+
+                        console.log(duck);
+                        console.log(color_strip);
+                        var result = duck.divide(color_strip); // Not a valid operation
                         // var result = path.divide(duck);
-                        result.clipped = true;
+                        // result.clipped = true;
 
                         console.log("Hello World");
 
