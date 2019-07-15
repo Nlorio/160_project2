@@ -7,7 +7,8 @@
     <title>P3 Coloring</title>
 
     <script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+<!--    <script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>-->
+    <script type="text/javascript" src="{% static 'coloring/vendors/paper_19/dist/paper-full.min.js' %}"></script>
 <!--    <script type="text/javascript" src="{% static 'coloring/vendors/zingtouch-master/dist/zingtouch.min.js' %}"></script>-->
 
 
@@ -145,14 +146,89 @@
                     duck.rotate(45);
                 };
 
+
                 tool.onMouseDown = function (event) {
                     var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
                     if (hit) {
                         // event.point.x
-                        var rectangle = new paper.Rectangle(event.point.x - 75,event.point.y - 2000,150,4000);
+                        var rectangle = new paper.Rectangle(event.point.x - 50,event.point.y - 2000,100,4000);
                         var path = new paper.Path.Rectangle(rectangle);
                         path.fillColor = cp.history[cp.history.length - 1];
-                    };
+
+
+                        // paper.project._activeLayer.remove();
+                        var result = duck.divide(path);
+                        // var result = path.divide(duck);
+                        result.clipped = true;
+
+                        console.log("Hello World");
+
+                        duck = result;
+
+
+                        // Remove previous duck
+                        // paper.project._activeLayer.remove();
+                        // // paper.project.getLayers()[0].remove();
+                        //
+                        // //exportSVG()
+                        var svgPathNode = result.exportSVG();
+                        // // paper.project.importSVG(svgPathNode.filePath, );
+                        //
+                        // // Upload and place new
+                        // Method 1
+                        paper.project.importSVG(svgPathNode, function(item) {
+                              duck = item;
+                              duck.scale(0.8);
+                              duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                              myCustomInteraction();
+                              // paper.project.insertLayer(0, duck);
+                        });
+
+
+                        // var svgPathElement = result.exportSVG(),
+                        //     dPath = svgPathElement.getAttribute('d');
+                        //
+                        // document.querySelector('path').setAttribute('d', dPath);
+                        //
+                        // var output = document.querySelector('#output');
+                        // output.innerHTML = '<pre>' + dPath + '</pre>';
+                        // output.innerHTML += '<xmp>' + svgPathElement.outerHTML + '</xmp>';
+
+
+
+
+                        // var url = new_duck.getPathData();
+                        // // // Rasterize current layer
+                        // // var tempImg = paper.project._activeLayer.rasterize();
+                        // // var dataString = tempImg.toDataURL();
+                        // // // tempImg.remove();
+                        // //
+                        // // // Remove previous duck
+                        // // paper.project._activeLayer.remove();
+                        // //
+                        // // Upload and place new
+                        // // Method 1
+                        //   paper.project.importSVG(url, function(item) {
+                        //           // paper.project.insertLayer(0,duck.item);
+                        //           duck = item;
+                        //           duck.scale(0.8);
+                        //           duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        //           paper.project.insertLayer(0, duck);
+                        //   });
+
+
+                        // Method 2
+                        // fetch(dataString).then(res => res.text()).then(svg => paper.project.importSVG(svg, function(item) {
+                        //     // duck.item = item._children["design-freepik"];
+                        //     paper.project.insertLayer(0,duck.item);
+                        //     duck = item;
+                        //     duck.scale(0.8);
+                        //     duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        // }));
+
+                        // duck = tempImg;
+                        // paper.project.insertLayer(0,duck);
+                    }
                 }
 
 
@@ -193,14 +269,12 @@
 
                 paper.project.importSVG(duck.filePath, function(item) {
                     duck.item = item._children["design-freepik"];
-                    // duck = item;
-                    // duck.scale(0.5);
-                    // duck.
                     paper.project.insertLayer(0,duck.item);
 
                     if (custom) {
                         duck = item;
                         duck.scale(0.8);
+                        // duck.scale(12);
                         duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
 
                         myCustomInteraction();
@@ -229,7 +303,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="750px" height="4000px">
+<canvas id="myCanvas" width="750px" height="1000px">
 </canvas>
 <div id="color-palette"></div>
  <div class="row">
