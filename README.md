@@ -1,3 +1,3 @@
-# 160_project2
+# Interactive Coloring
 
 Interactive Coloring Application 
