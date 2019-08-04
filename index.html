@@ -1,0 +1,342 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>P3 Coloring</title>
+
+    <script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+<!--    <script type="text/javascript" src="{% static 'coloring/vendors/paper_19/dist/paper-full.min.js' %}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'coloring/vendors/zingtouch-master/dist/zingtouch.min.js' %}"></script>-->
+
+
+    <style type="text/css">
+        #color-palette {
+            width: 300px;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            top: 0;
+        }
+
+        .swatch {
+            width: 24px;
+            height: 24px;
+            -moz-border-radius: 12px;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            margin: 3px;
+        }
+
+        #myCanvas {
+            padding-left: 0;
+            padding-right: 0;
+            /*padding-top: 150px;*/
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        #rotate_buttons {
+            width: 180px;
+            height: 100px;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+
+
+
+        /*--Test Code--*/
+
+
+        /*----*/
+
+    </style>
+
+
+
+    <script type="text/javascript" canvas="canvas">
+        window.onload = function() {
+
+            var canvas = document.getElementById('myCanvas');
+
+
+            // coloring page
+            // var mandala = {
+            //     item: null,
+            //     lastClicked: null,
+            //     filePath: '/static/coloring/images/mandala-freepik.svg'
+            // };
+
+            // Design Silhouette
+            // var duck = {
+            //     item: null,
+            //     lastClicked: null,
+            //     // filePath: '/static/coloring/images/Duck_Outline.svg'
+            // };
+
+            // color palette
+            var cp = {
+                history: ["#000000"], // black selected by default
+                options: [],
+                $container: $('#color-palette')
+            };
+
+
+            // var rectangle = new paper.Rectangle(285,300,150,80);
+            // var path = new paper.Path.Rectangle(rectangle);
+
+
+            function myGradientInteraction(){
+                var tool = new paper.Tool();
+
+
+                var rectangle = new paper.Rectangle(285,300,150,80);
+                var path = new paper.Path.Rectangle(rectangle);
+                // var colorStops = [cp.history[cp.history.length - 1], cp.history[cp.history.length - 2]]
+                var originPoint;
+                path.fillColor =  "red";
+
+                tool.onMouseDown = function (event) {
+                    var newPath = new paper.Path();
+                    originPoint = event.point;
+                };
+
+                tool.onMouseUp = function (event) {
+                    var colorStops = [cp.history[cp.history.length - 1], cp.history[cp.history.length - 2]]
+                    var gradient = {
+                        gradient: {
+                            stops: colorStops,
+                            // radial: false
+                        },
+                        origin: originPoint,
+                        destination: event.point
+                    };
+                    path.fillColor = gradient
+                }
+            }
+
+            // your custom interaction goes here!
+
+            // you may replace everything
+            function myCustomInteraction() {
+                var tool = new paper.Tool();
+                var group = new paper.Group([window.duck]);
+
+                // tool.onMouseDown = function (event) {
+                //     var hit = duck.hitTest(event.point, { tolerance: 10, fill: true });
+                //     if (hit) {
+                //         hit.item.fillColor = cp.history[cp.history.length - 1];
+                //         // duck.rotate(45);
+                //     }
+                // };
+
+                document.getElementById("r_left").onclick = function () {
+                    group.rotate(-45);
+                };
+
+                document.getElementById("r_right").onclick = function () {
+                    group.rotate(45);
+                };
+
+
+                tool.onMouseDown = function (event) {
+
+                    var hit = window.duck.hitTest(event.point, { tolerance: 10, fill: true });
+                    if (hit) {
+                        var rectangle = new paper.Rectangle(event.point.x - 50,event.point.y - 2000,100,4000);
+                        var color_strip = new paper.Path.Rectangle(rectangle);
+                        color_strip.fillColor = cp.history[cp.history.length - 1];
+
+                        // console.log(path.divide(path));
+
+                        var result_rect = window.duck.intersect(color_strip);
+                        result_rect.fillColor = color_strip.fillColor;
+                        group.addChild(result_rect);
+
+
+
+                        // var result = window.duck.divide(color_strip, {insert:true, trace:true});
+                        // result.children[1].fillColor = cp.history[cp.history.length - 1];
+                        // result.children[1].fillColor = cp.history[cp.history.length - 1];
+                        // result.children[2].fillColor = cp.history[cp.history.length - 1];
+                        // var result = path.divide(duck);
+                        // result.clipped = true;
+
+                        // window.duck.clear();
+                        color_strip.clear();
+                        // window.duck = result;
+
+
+                        // Remove previous duck
+                        // paper.project._activeLayer.remove();
+                        // // // paper.project.getLayers()[0].remove();
+                        // //
+                        // // //exportSVG()
+                        // var svgPathNode = result.exportSVG();
+                        // // // paper.project.importSVG(svgPathNode.filePath, );
+                        // //
+                        // // // Upload and place new
+                        // // Method 1
+                        // paper.project.importSVG(svgPathNode, function(item) {
+                        //       duck = item;
+                        //       duck.scale(0.8);
+                        //       duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        //       myCustomInteraction();
+                        //       // paper.project.insertLayer(0, duck);
+                        // });
+
+
+                        // var svgPathElement = result.exportSVG(),
+                        //     dPath = svgPathElement.getAttribute('d');
+                        //
+                        // document.querySelector('path').setAttribute('d', dPath);
+                        //
+                        // var output = document.querySelector('#output');
+                        // output.innerHTML = '<pre>' + dPath + '</pre>';
+                        // output.innerHTML += '<xmp>' + svgPathElement.outerHTML + '</xmp>';
+
+
+
+
+                        // var url = new_duck.getPathData();
+                        // // // Rasterize current layer
+                        // // var tempImg = paper.project._activeLayer.rasterize();
+                        // // var dataString = tempImg.toDataURL();
+                        // // // tempImg.remove();
+                        // //
+                        // // // Remove previous duck
+                        // // paper.project._activeLayer.remove();
+                        // //
+                        // // Upload and place new
+                        // // Method 1
+                        //   paper.project.importSVG(url, function(item) {
+                        //           // paper.project.insertLayer(0,duck.item);
+                        //           duck = item;
+                        //           duck.scale(0.8);
+                        //           duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        //           paper.project.insertLayer(0, duck);
+                        //   });
+
+
+                        // Method 2
+                        // fetch(dataString).then(res => res.text()).then(svg => paper.project.importSVG(svg, function(item) {
+                        //     // duck.item = item._children["design-freepik"];
+                        //     paper.project.insertLayer(0,duck.item);
+                        //     duck = item;
+                        //     duck.scale(0.8);
+                        //     duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                        // }));
+
+                        // duck = tempImg;
+                        // paper.project.insertLayer(0,duck);
+                    }
+                }
+
+
+            }
+
+
+
+            // create a color palette with the given colors
+            function createColorPalette(colors){
+
+                // create a swatch for each color
+                for (var i = colors.length - 1; i >= 0; i--) {
+                    var $swatch = $("<div>").css("background-color", colors[i])
+                        .addClass("swatch");
+                    $swatch.click(function(){
+                        // add color to the color palette history
+                        cp.history.push($(this).css("background-color"));
+                    });
+                    cp.$container.append($swatch);
+                }
+            }
+
+            // loads a set of colors from a json to create a color palette
+            function getColorsCreatePalette(){
+                cp.$container.html(" ");
+                $.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
+                    var keys = Object.keys(colors);
+                    for (var i = keys.length - 1; i >= 0; i--) {
+                        cp.options.push(colors[keys[i]][500]);
+                    }
+                    createColorPalette(cp.options);
+                });
+            }
+
+            function init(){
+                paper.setup(canvas);
+                getColorsCreatePalette();
+
+                var duck_design = new paper.Rectangle(285, 300, 500, 400);
+                window.duck = new paper.Path.Rectangle(duck_design);
+                duck.closed = true;
+                duck.strokeColor = 'black';
+                duck.fillColor = 'white';
+                myCustomInteraction();
+                duck.position = new paper.Point(duck.bounds.width/1.5 , duck.bounds.height*1.2);
+
+                // paper.project.importSVG(duck.filePath, function(item) {
+                //     duck.item = item._children["design-freepik"];
+                //     paper.project.insertLayer(0,duck.item);
+                //
+                //     if (custom) {
+                //         duck = item;
+                //         duck.scale(0.8);
+                //         // duck.scale(12);
+                //         duck.position = new paper.Point(duck.bounds.width/1.4, duck.bounds.height*1);
+                //
+                //         myCustomInteraction();
+                //
+                //     } else {
+                //         myGradientInteraction();
+                //     }
+                //
+                // });
+            }
+
+            // To see your myGradientInteraction version visit:
+            // http://<your url>:8000/coloring/?type=gradient
+            // To see your myCustomInteraction version visit:
+            // http://<your url>:8000/coloring/
+            var url = window.location.href;
+            if (url.indexOf("gradient") > -1) {
+                init(false);
+            } else {
+                init(true);
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+
+<canvas id="myCanvas" width="750px" height="1000px">
+</canvas>
+<div id="color-palette"></div>
+ <div class="row">
+        <div class="col-6">
+            <div class="btn-group btn-group-vertical" id="rotate_buttons">
+                <button class="btn btn-light float-right" id="r_left">
+                    Rotate Left
+                </button>
+                <button class="btn btn-light float-right" id="r_right">
+                    Rotate Right
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

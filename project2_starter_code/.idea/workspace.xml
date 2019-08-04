@@ -18,7 +18,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
+            <state relative-caret-position="600">
               <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
             </state>
           </provider>
@@ -52,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="293" />
     <option name="y" value="53" />
     <option name="width" value="1400" />
@@ -125,7 +125,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project3/p3-websockets-Nlorio" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -153,18 +153,18 @@
       <updated>1562655720049</updated>
       <workItem from="1562655721368" duration="6052000" />
       <workItem from="1562696375679" duration="103000" />
-      <workItem from="1563053193009" duration="45335000" />
+      <workItem from="1563053193009" duration="46371000" />
+      <workItem from="1563821513915" duration="10000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51490000" />
+    <option name="totallyTimeSpent" value="52536000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
-    <editor active="true" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18306011" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18306011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -176,7 +176,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.22039473" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.22039473" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -197,37 +197,25 @@
     <entry file="file://$PROJECT_DIR$/coloring/static/coloring/images/triangles.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../app/templates/b.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/lazer_duck.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2668">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../app/templates/b.html" />
+    <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/lazer_duck.html" />
     <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/start_scratch.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-138" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coloring/static/coloring/images/Duck_Outline.svg">
-      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/coloring/static/coloring/images/noun_Bear_1817623.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/coloring/templates/coloring/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
+        <state relative-caret-position="600">
           <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coloring/static/coloring/images/Duck_Outline.svg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>
