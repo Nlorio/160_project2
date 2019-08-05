@@ -266,7 +266,7 @@
             // loads a set of colors from a json to create a color palette
             function getColorsCreatePalette(){
                 cp.$container.html(" ");
-                $.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
+                $.getJSON('static/coloring/vendors/material/material-colors.json', function(colors){
                     var keys = Object.keys(colors);
                     for (var i = keys.length - 1; i >= 0; i--) {
                         cp.options.push(colors[keys[i]][500]);
